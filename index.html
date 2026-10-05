@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="roulette.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -20,14 +21,13 @@
     </header>
 
     <section class="intro">
-      <p class="eyebrow">THE CLASSIC AMERICAN WHEEL</p>
       <h1>Make your bet.<br><em>Know the odds.</em></h1>
       <p class="intro-copy">Explore roulette probabilities and payouts on a double-zero table. Every spin is random—this calculator explains the math, it doesn’t predict outcomes.</p>
     </section>
 
     <section class="game-layout" aria-label="American roulette odds calculator">
       <div class="table-card">
-        <div class="table-heading"><div><span class="section-kicker">PLACE YOUR BET</span><h2>American roulette</h2></div><span class="wheel-badge">0 <span>·</span> 00</span></div>
+        <div class="table-heading"><div><span class="section-kicker">PLACE YOUR CHIPS</span><div class="table-title"><h2>American roulette</h2><span class="wheel-caption">THE CLASSIC AMERICAN WHEEL</span></div></div><span class="wheel-badge">0 <span>·</span> 00</span></div>
         <div class="table-wrap">
           <div class="roulette-table" aria-label="Roulette betting table">
             <div class="zero-stack">
@@ -41,24 +41,54 @@
           </div>
           <div class="outside-grid" id="outside-grid" aria-label="Outside bets"></div>
         </div>
-        <div class="table-footer"><span><i class="legend red-legend"></i> Red</span><span><i class="legend black-legend"></i> Black</span><span><i class="legend green-legend"></i> Zero pockets</span><span class="footer-note">Select one bet at a time</span></div>
+        <div class="table-footer"><span><i class="legend red-legend"></i> Red</span><span><i class="legend black-legend"></i> Black</span><span><i class="legend green-legend"></i> Zero pockets</span><span class="footer-note">Drag a chip or choose a chip and tap a bet</span></div>
+        <section class="chip-tray" aria-label="Choose your chips">
+        <div class="panel-top"><span class="section-kicker">YOUR CHIPS</span><button class="clear-button" id="clear-bet" type="button">Clear all <span aria-hidden="true">↺</span></button></div>
+          <div class="chip-controls">
+            <div class="chip-presets">
+        <div class="selected-bet"><span class="selection-icon" id="selection-icon">$10</span><div><span class="selection-label">CHIP VALUE</span><strong id="bet-name">Ready to place</strong></div></div>
+        <div class="chip-row" aria-label="Choose or drag a chip">
+          <button class="chip" data-value="1" type="button">$1</button><button class="chip" data-value="5" type="button">$5</button><button class="chip active" data-value="10" type="button">$10</button><button class="chip" data-value="25" type="button">$25</button><button class="chip" data-value="50" type="button">$50</button><button class="chip" data-value="100" type="button">$100</button>
+        </div>
+            </div>
+            <div class="chip-custom">
+        <label class="field-label" for="wager">Custom chip amount</label>
+        <div class="amount-field"><span>$</span><input id="wager" type="number" min="0.01" max="1000000" step="0.01" value="10" inputmode="decimal" aria-label="Chip amount in dollars" aria-describedby="wager-error"></div>
+        <p class="wager-error" id="wager-error" hidden>Enter $0.01–$1,000,000, with at most two decimal places.</p>
+        <button class="custom-chip" id="custom-chip" type="button">Drag custom chip · $10</button>
+            </div>
+          </div>
+        <p class="chip-help">Drag a chip onto a bet, or select its value and click a table space. Repeat to stack chips.</p>
+        <p class="chip-status" id="chip-status" role="status" aria-live="polite"></p>
+        </section>
+        <section class="placed-section" aria-label="Placed chips">
+          <div class="placed-heading"><span class="section-kicker">CHIPS ON THE TABLE</span><span id="chip-count">0 chips</span></div>
+          <p class="empty-chips" id="empty-chips">Your chips will appear here. Drag them to move a bet, or use × to remove one.</p>
+          <ul class="placed-list" id="placed-list"></ul>
+          <div class="chip-trash" id="chip-trash">Drop a placed chip here to remove it</div>
+        </section>
       </div>
 
       <aside class="bet-panel">
-        <div class="panel-top"><span class="section-kicker">YOUR BET</span><button class="clear-button" id="clear-bet" type="button">Clear <span aria-hidden="true">↺</span></button></div>
-        <div class="selected-bet" aria-live="polite"><span class="selection-icon" id="selection-icon">—</span><div><span class="selection-label">SELECTED BET</span><strong id="bet-name">Choose a space</strong></div></div>
-        <label class="field-label" for="wager">Wager amount</label>
-        <div class="amount-field"><span>$</span><input id="wager" type="number" min="0.01" step="0.01" value="10" inputmode="decimal" aria-label="Wager amount in dollars"></div>
-        <div class="chip-row" aria-label="Quick wager amounts">
-          <button class="chip" data-value="1" type="button">$1</button><button class="chip" data-value="5" type="button">$5</button><button class="chip active" data-value="10" type="button">$10</button><button class="chip" data-value="25" type="button">$25</button>
+        <div class="panel-top"><span class="section-kicker">YOUR BETS</span></div>
+        <div class="profit-loss-summary" aria-label="Overall net result probabilities">
+          <div class="result-chance profit-chance"><span>ANY NET PROFIT</span><strong id="probability">—</strong></div>
+          <div class="result-chance loss-chance"><span>ANY NET LOSS</span><strong id="loss-probability">—</strong></div>
         </div>
+        <div class="break-even-chance"><span>Break even</span><strong id="break-even-probability">—</strong></div>
+        <p class="result-help">After all bets are settled, compared with your total wager.</p>
         <div class="panel-rule"></div>
         <div class="metrics">
-          <div class="metric"><span>Chance to win</span><strong id="probability">—</strong></div>
-          <div class="metric"><span>Winning pockets</span><strong id="pockets">—</strong></div>
-          <div class="metric"><span>Payout odds</span><strong id="payout-odds">—</strong></div>
+          <div class="metric"><span>Pockets with a payout</span><strong id="pockets">—</strong></div>
+          <div class="metric"><span>Total on table</span><strong id="total-wager">—</strong></div>
         </div>
-        <div class="return-box"><div><span class="return-label">TOTAL RETURN IF WIN</span><small>Includes your original wager</small></div><strong id="total-return">—</strong></div>
+        <div class="return-box"><div><span class="return-label">POSSIBLE RETURN</span><small>Range across all 38 outcomes</small></div><strong id="total-return">—</strong></div>
+        <section class="outcome-breakdown" id="outcome-breakdown" aria-labelledby="outcome-heading" hidden>
+          <h3 class="section-kicker" id="outcome-heading">HOW YOUR BETS CAN PAY</h3>
+          <p class="outcome-help">Each result shows the bets that win together. Return includes returned stakes; net subtracts everything on the table.</p>
+          <ul class="outcome-list" id="outcome-list"></ul>
+          <p class="outcome-footnote">These results cover all 38 pockets. Percentages are rounded.</p>
+        </section>
         <div class="edge-line"><span>American roulette house edge</span><strong>5.26%</strong></div>
         <p class="disclaimer">A standard American wheel has 38 pockets: 1–36, 0, and 00. Past spins do not affect future results.</p>
       </aside>
