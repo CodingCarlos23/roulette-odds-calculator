@@ -92,8 +92,6 @@ function updateChipValue() {
   const cents = Roulette.parseAmount(wagerInput.value);
   wagerInput.setAttribute("aria-invalid", String(cents === null));
   document.querySelector("#wager-error").hidden = cents !== null;
-  document.querySelector("#selection-icon").textContent = cents === null ? "—" : shortMoney(cents);
-  document.querySelector("#bet-name").textContent = cents === null ? "Enter a chip amount" : "Ready to place";
   customChip.textContent = cents === null ? "Enter a valid chip amount" : `Drag custom chip · ${shortMoney(cents)}`;
   customChip.disabled = cents === null;
   document.querySelectorAll(".chip").forEach(chip => {

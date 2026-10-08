@@ -17,17 +17,13 @@
   <main class="page-shell">
     <header class="topbar">
       <a class="brand" href="#" aria-label="Roulette Odds Calculator home"><span class="brand-mark">R</span><span>ROULETTE <span class="brand-light">/ ODDS CALCULATOR</span></span></a>
+      <h1 class="header-quote">Make your bet. <em>Know the odds.</em></h1>
       <span class="table-label"><span class="live-dot"></span> AMERICAN TABLE <span class="table-divider">·</span> 38 POCKETS</span>
     </header>
 
-    <section class="intro">
-      <h1>Make your bet.<br><em>Know the odds.</em></h1>
-      <p class="intro-copy">Explore roulette probabilities and payouts on a double-zero table. Every spin is random—this calculator explains the math, it doesn’t predict outcomes.</p>
-    </section>
-
     <section class="game-layout" aria-label="American roulette odds calculator">
       <div class="table-card">
-        <div class="table-heading"><div><span class="section-kicker">PLACE YOUR CHIPS</span><div class="table-title"><h2>American roulette</h2><span class="wheel-caption">THE CLASSIC AMERICAN WHEEL</span></div></div><span class="wheel-badge">0 <span>·</span> 00</span></div>
+        <div class="table-heading"><h2 class="table-heading-caption">America Roulette: Place your chips</h2><span class="wheel-badge">0 <span>·</span> 00</span></div>
         <div class="table-wrap">
           <div class="roulette-table" aria-label="Roulette betting table">
             <div class="zero-stack">
@@ -43,13 +39,13 @@
         </div>
         <div class="table-footer"><span><i class="legend red-legend"></i> Red</span><span><i class="legend black-legend"></i> Black</span><span><i class="legend green-legend"></i> Zero pockets</span><span class="footer-note">Drag a chip or choose a chip and tap a bet</span></div>
         <section class="chip-tray" aria-label="Choose your chips">
-        <div class="panel-top"><span class="section-kicker">YOUR CHIPS</span><button class="clear-button" id="clear-bet" type="button">Clear all <span aria-hidden="true">↺</span></button></div>
+        <div class="panel-top"><span class="section-kicker">YOUR CHIPS</span></div>
           <div class="chip-controls">
             <div class="chip-presets">
-        <div class="selected-bet"><span class="selection-icon" id="selection-icon">$10</span><div><span class="selection-label">CHIP VALUE</span><strong id="bet-name">Ready to place</strong></div></div>
         <div class="chip-row" aria-label="Choose or drag a chip">
           <button class="chip" data-value="1" type="button">$1</button><button class="chip" data-value="5" type="button">$5</button><button class="chip active" data-value="10" type="button">$10</button><button class="chip" data-value="25" type="button">$25</button><button class="chip" data-value="50" type="button">$50</button><button class="chip" data-value="100" type="button">$100</button>
         </div>
+        <div class="chip-trash" id="chip-trash">Drop a placed chip here to remove it</div>
             </div>
             <div class="chip-custom">
         <label class="field-label" for="wager">Custom chip amount</label>
@@ -65,8 +61,10 @@
           <div class="placed-heading"><span class="section-kicker">CHIPS ON THE TABLE</span><span id="chip-count">0 chips</span></div>
           <p class="empty-chips" id="empty-chips">Your chips will appear here. Drag them to move a bet, or use × to remove one.</p>
           <ul class="placed-list" id="placed-list"></ul>
-          <div class="chip-trash" id="chip-trash">Drop a placed chip here to remove it</div>
         </section>
+        <div class="table-actions">
+          <button class="clear-button" id="clear-bet" type="button">Clear all chips <span aria-hidden="true">↺</span></button>
+        </div>
       </div>
 
       <aside class="bet-panel">
@@ -74,8 +72,8 @@
         <div class="profit-loss-summary" aria-label="Overall net result probabilities">
           <div class="result-chance profit-chance"><span>ANY NET PROFIT</span><strong id="probability">—</strong></div>
           <div class="result-chance loss-chance"><span>ANY NET LOSS</span><strong id="loss-probability">—</strong></div>
+          <div class="result-chance break-even-chance"><span>BREAK EVEN</span><strong id="break-even-probability">—</strong></div>
         </div>
-        <div class="break-even-chance"><span>Break even</span><strong id="break-even-probability">—</strong></div>
         <p class="result-help">After all bets are settled, compared with your total wager.</p>
         <div class="panel-rule"></div>
         <div class="metrics">
